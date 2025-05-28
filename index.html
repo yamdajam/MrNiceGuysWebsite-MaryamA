@@ -16,24 +16,7 @@
 
 <body>
   <!-- Navbar -->
-  <nav class="navbar">
-    <div class="nav-banner">
-      <img src="Home-page/Nav_bar/navbanner.svg">
-    </div>
-    <div class="nav-icon left-icons">
-      <img src="Home-page/Nav_bar/icon_ham.svg" alt="Menu" />
-      <img src="Home-page/Nav_bar/icon_loc.svg" alt="Location" />
-    </div>
-
-    <div class="nav-logo">
-      <img src="https://www.misterniceguy.com.au/wp-content/themes/misterniceguy/images/global/logo.png" alt="Logo" />
-    </div>
-
-    <div class="nav-icon right-icons">
-      <img src="Home-page/Nav_bar/icon_search.svg" alt="Search" />
-      <img src="Home-page/Nav_bar/icon_cart.svg" alt="Cart" />
-    </div>
-  </nav>
+  <div id="navbar-placeholder"></div>
 
   <!-- Hero Section -->
   <section class="hero">
@@ -73,6 +56,15 @@
 
 <main></main>
 
+<!--Load nav bar-->
+<script>
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-placeholder').innerHTML = data;
+    })
+    .catch(error => console.error('Navbar load error:', error));
+</script>
 
 </body>
 </html>
