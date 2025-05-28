@@ -10,7 +10,28 @@ body {
   font-family: sans-serif;
   overflow-x: hidden;
   line-height: 1.4;
-  background-image: url(Nav_bar/Bacgkground-sprinkles.svg);
+  background-image: url(Home-page/Nav_bar/Bacgkground-sprinkles.svg);
+}
+
+p {
+  /*Nunito font* <weight>: Use a value from 200 to 1000*/
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+h1 {
+  font-family: "Barriecito", system-ui;
+  font-weight: 400;
+  font-size: 40px;
+  text-align: center;
+  font-style: normal;
+}
+
+h2 {
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* Navbar */
