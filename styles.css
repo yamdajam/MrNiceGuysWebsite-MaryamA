@@ -63,6 +63,11 @@ h2 {
   object-fit: contain;
   margin: 0 0.9rem;
   cursor: pointer;
+  transition: transform 0.2s ease; /* smooth animation */
+}
+
+.nav-icon:hover {
+  transform: scale(1.15); /* grows by 15% */
 }
 
 .nav-logo img {
