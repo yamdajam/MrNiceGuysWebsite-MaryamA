@@ -66,13 +66,19 @@ h2 {
   transition: transform 0.2s ease; /* smooth animation */
 }
 
-.nav-icon:hover img {
+.nav-icon img:hover {
   transform: scale(1.15); /* grows by 15% */
 }
 
 .nav-logo img {
   height: 100px;
   filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.25));
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.nav-logo:hover img {
+  transform: scale(1.15);
 }
 
 /* Hero Section */
@@ -106,10 +112,10 @@ h2 {
 /* Jump to menu button */
 .jump-btn {
   display: inline-block;
-  background-color: #5b3a2c;
-  color: white;
+  background-color: #6B534C;
+  color: #FDF6EC;
   font-weight: bold;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Barriecito", system-ui;
   padding: 1rem 2rem;
   font-size: 1rem;
   text-decoration: none;
