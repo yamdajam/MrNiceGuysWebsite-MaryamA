@@ -72,7 +72,7 @@ h2 {
 .left-icons,
 .right-icons {
   display: flex;
-  gap: 1rem
+  gap: 4rem
 }
 
 .nav-icon img:hover {
@@ -144,6 +144,7 @@ h2 {
   background-color: #71c578;
 }
 
+
 /* Responsive adjustment for mobile webview */
 @media (max-width: 768px) {
   body {
@@ -151,11 +152,12 @@ h2 {
     background-size: cover;
     background-position: center top;
   }
+}
 
-  .navbar {
+  /*.navbar {
     flex-direction: row;
     justify-content: space-between;
-    height: auto;
+    height: 140px;
     padding: 1rem;
     align-items: center;
   }
@@ -211,3 +213,4 @@ h2 {
     font-size: 2rem;
   }
 }
+
