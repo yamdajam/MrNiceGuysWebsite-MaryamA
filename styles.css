@@ -154,8 +154,15 @@ h2 {
   }
 }
 
-.navbar {
-    flex-direction: row;
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+  }
+
+
+/*.navbar {
+    flex-direction: column;
     justify-content: space-between;
     height: 140px;
     padding: 1rem;
