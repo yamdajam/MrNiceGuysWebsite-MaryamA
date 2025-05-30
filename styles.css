@@ -154,7 +154,7 @@ h2 {
   }
 }
 
-  /*.navbar {
+.navbar {
     flex-direction: row;
     justify-content: space-between;
     height: 140px;
@@ -212,5 +212,4 @@ h2 {
   h1 {
     font-size: 2rem;
   }
-}
 
