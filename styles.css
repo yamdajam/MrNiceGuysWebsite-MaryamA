@@ -12,7 +12,6 @@
   --text-color: #222;
 }
 */
-
 body {
   background-color: #fff7ec;
   overflow-x: hidden; /*hides content that overflows horizontal*/
@@ -23,21 +22,30 @@ body {
   background-size: cover;
   background-size: contain;                
   background-attachment: scroll;
-}
+  justify-content: center;
 
-p {
-  /*Nunito font* <weight>: Use a value from 200 to 1000*/
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto; /*what*/
   font-style: normal;
+  font-size: 20px;
+  margin: auto 0;
+
+  line-height: 1.8;
+  text-align: center;
+}
+
+strong {
+  font-weight: 700;
 }
 
 h1 {
   font-family: "Barriecito", system-ui;
   font-weight: 400;
-  font-size: 2.5rem;
+  font-size: 65px;
   text-align: center;
   font-style: normal;
+  color: #657D71;
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.25));
 }
 
 h2 {
@@ -154,6 +162,31 @@ h2 {
 }
 
 
+/*ABOUT SECTION*/
+.about-section {
+  padding: 5rem 1rem 4rem;
+  text-align: center;
+}
+
+.about-section p {
+  line-height: 1.8;
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  color: #4e3d36;
+}
+
+.about-section h1 {
+  margin-bottom: 1rem;
+}
+
+/*MENU SECTION*/
+.menu-section {
+
+}
+
+
 /* Responsive adjustment for mobile webview */
 @media (max-width: 390px) {
   .navbar {
@@ -180,6 +213,8 @@ h2 {
     gap: 1.5rem;
     width: auto;
     flex: 1;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   .left-icons {
