@@ -5,13 +5,6 @@
   box-sizing: border-box;
 }
 
-/*set accent colours*
-:root {
-  --primary-color: #2e86de;
-  --accent-color: #ff6b6b;
-  --text-color: #222;
-}
-*/
 body {
   background-color: #fff7ec;
   overflow-x: hidden; /*hides content that overflows horizontal*/
@@ -59,7 +52,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: nowrap;  /* container that prevents flex from wrapping into multiple lines. will all fit on a single row. */
+  flex-wrap: nowrap;  /* container that makes all fit on a single row. */
   padding: 0 1.5rem;
   height: 220px;
   position: fixed;
@@ -105,7 +98,7 @@ h2 {
   transform: scale(1.15);
 }
 
-/* Hero Section */
+/* HERO SECTION*/
 .hero {
   margin-top: 100px;
   text-align: center;
@@ -113,12 +106,6 @@ h2 {
   padding: 4rem 1rem;
   min-height: 90vh;
 }
-
-/*.hero-imgs {
-  width:100%;
-  position: relative;
-  z-index: 1;
-}*/
 
 .hero img:first-of-type {
   width: 100%;
@@ -181,18 +168,6 @@ h2 {
   margin-bottom: 1rem;
 }
 
-/*MENU SECTION
-.products-list{
-  display: flex;
-  list-style: none;        
-  padding: 0;               
-  margin: 0;                
-  gap: 20px;  
-  
-  justify-content: center;
-}
-*/
-
 /*MENU SECTION*/
 .products-list {
   display: flex;
@@ -205,6 +180,7 @@ h2 {
 }
 
 .product a {
+  margin:-15px; /*using negative margin to bring items closer*/
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -219,6 +195,8 @@ h2 {
 
 /* Responsive adjustment for mobile webview */
 @media (max-width: 390px) {
+
+  /*NAV BAR*/
   .navbar {
     flex-wrap: wrap;
     justify-content: space-between;
@@ -266,6 +244,8 @@ h2 {
     height: 60px;
   }
 
+
+  /* HERO SECTION*/
   .hero {
     padding: 2rem 1rem;
     margin-top: 150px;
@@ -302,12 +282,14 @@ h2 {
     font-size: 16px;
   }
   
-.products-list {
-    flex-wrap: nowrap;                  /* Don't stack vertically */
-    justify-content: space-between;    /* Even horizontal spacing */
-    transform: scale(0.90);            /* Shrink to fit mobile */
-    transform-origin: center top;
-  }
+
+  /*MENU SECTION*/
+  .products-list {
+      flex-wrap: nowrap;                  /* Don't stack vertically */
+      justify-content: space-between;    /* Even horizontal spacing */
+      transform: scale(0.90);            /* Shrink to fit mobile */
+      transform-origin: center top;
+    }
 
   .product {
     flex: 0 0 25%;                      /* 4 items fit across */
@@ -320,22 +302,11 @@ h2 {
     max-width: 200px;               /* Scaled-down icons */
   }
 
-
-
-.products-list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  list-style: none;
-  margin-right: 5px;
-  transform: scale(0.8); /* shrink to 90% size */
-  transform-origin: center;
-}
-
-.product a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: inherit;
+  .product a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
 }
