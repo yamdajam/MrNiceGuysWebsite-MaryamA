@@ -380,23 +380,26 @@ h2 {
     justify-content: space-between;
     gap: 0.5rem;
     padding: 0 0.5rem;
+    width: 100%;
+    overflow: hidden;      /* prevents scrollbars */
   }
 
   .base-choices li {
-    flex: 1 1 30%;
-    max-width: 30%;  /* reduce width */
+    flex: 1;
+    max-width: 25%;         /* 4 items fit safely */
+    min-width: 0;
   }
 
   .base-card img {
-    max-width: 80px;
+    max-width: 70px;
+    height: auto;
   }
 
   .base-card p {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .base-selection h1 {
     font-size: 1.6rem;
   }
 }
-
