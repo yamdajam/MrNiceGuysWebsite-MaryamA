@@ -374,4 +374,29 @@ h2 {
     text-decoration: none;
     color: inherit;
   }
+
+  .base-choices {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .base-choices li {
+    flex: 1 1 30%;
+    max-width: 30%;  /* reduce width */
+  }
+
+  .base-card img {
+    max-width: 80px;
+  }
+
+  .base-card p {
+    font-size: 1rem;
+  }
+
+  .base-selection h1 {
+    font-size: 1.6rem;
+  }
 }
+
