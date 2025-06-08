@@ -257,6 +257,22 @@ h2 {
   line-height: 2.5rem;
 }
 
+.footer {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.9rem;
+  color: #4e3d36;
+  background: linear-gradient(to top, #F7A9A8 0%, #FDF6EC 100%);
+  padding: 4rem 1rem;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.footer p {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+
 
 /* Responsive adjustment for mobile webview */
 @media (max-width: 390px) {
