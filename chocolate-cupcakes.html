@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mister Nice Guys</title>
+  <link rel="icon" type="image/x-icon" href="https://www.misterniceguy.com.au/wp-content/themes/misterniceguy/images/global/logo.png">
+
+  <!--Google fonts embed-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barriecito&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pacifico&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+
+<body>
+<!--NAVBAR PLACEHOLDER -->
+  <div id="navbar-placeholder"></div>
+  <main>
+    <a href="choose-base.html" class="go-back">Go back</a>
+    <h1>Chocolate Cupcakes</h1>
+    <div class="cupcake-grid">
+      <div class="cupcake-card">
+        <img src="Cupcakes/Rockin-Rollin.png" alt="Rockin Rollin" />
+        <p>Rockin Rollin</p>
+        <button>View</button>
+      </div>
+      <div class="cupcake-card">
+        <img src="Cupcakes/Count-Chocula.png" alt="Count Chocula" />
+        <p>Count Chocula</p>
+        <button>View</button>
+      </div>
+      <div class="cupcake-card">
+        <img src="Cupcakes/Neapolitan.png" alt="Neapolitan" />
+        <p>Neapolitan</p>
+        <button>View</button>
+      </div>
+      <div class="cupcake-card">
+        <img src="Cupcakes/Smores.png" alt="Smores" />
+        <p>Smores</p>
+        <button>View</button>
+      </div>
+      <div class="cupcake-card">
+        <img src="Cupcakes/Sprinkle-Fun.png" alt="Sprinkle Fun" />
+        <p>Sprinkle Fun</p>
+        <button>View</button>
+      </div>
+      <div class="cupcake-card">
+        <img src="Cupcakes/Strawberry-Bliss.png" alt="Strawberry Bliss" />
+        <p>Strawberry Bliss</p>
+        <button>View</button>
+      </div>
+      <div class="cupcake-card">
+        <img src="Cupcakes/Raspberry-Dream.png" alt="Raspberry Dream" />
+        <p>Raspberry Dream</p>
+        <button>View</button>
+      </div>
+      <div class="cupcake-card">
+        <img src="Cupcakes/Chocolate-Delight.png" alt="Chocolate Delight" />
+        <p>Chocolate Delight</p>
+        <button>View</button>
+      </div>
+    </div>
+  </main>
+  <!--FOOTER-->
+  <footer class="footer">
+  <p>
+    Terms & Conditions | Refund Policy | Privacy Policy | FAQs<br>
+    <strong>Mister Nice Guys BakeShop</strong><br>
+    151 Union Rd, Ascot Vale 3032 Australia<br>
+    Website by Maryam AL-Mahdi<br>
+    © MNG BAKERY PTY LTD 2025
+  </p>
+</footer>
+
+
+
+<!--Load nav bar SCRIPT-->
+<script>
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-placeholder').innerHTML = data;
+    })
+    .catch(error => console.error('Navbar load error:', error));
+</script>
+
+</body>
+</html>
