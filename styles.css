@@ -348,7 +348,7 @@ h2 {
     }
 
 /* Responsive adjustment for mobile webview */
-@media (max-width: 390px) {
+@media (max-width: 480px) {
 
   /*NAV BAR*/
   .navbar {
