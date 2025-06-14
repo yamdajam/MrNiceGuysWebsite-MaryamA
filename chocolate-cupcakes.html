@@ -25,7 +25,7 @@
       <div class="cupcake-card">
         <img src="Choc-cupcakes/rockinrollin.svg" alt="Rockin Rollin" />
         <p>Rockin Rollin</p>
-        <button>View</button>
+        <button onclick="openModal('rockin')">View</button>
       </div>
       <div class="cupcake-card">
         <img src="Choc-cupcakes/countchocula.svg" alt="Count Chocula" />
@@ -63,6 +63,39 @@
         <button>View</button>
       </div>
     </div>
+
+    <!-- Rockin Rollin Popup -->
+    <div id="rockin" class="modal">
+      <div class="modal-content">
+        <h2>Rockin Rollin</h2>
+        <img src="Choc-cupcakes/rockinrollin.svg" alt="Rockin Rollin" />
+        <p class="desc">Chocolate cupcake with Strawberry Frosting and Chocolate Ganache</p>
+
+        <div class="options">
+          <div class="option-row">
+            <label>Mini</label>
+            <div class="qty-control">
+              <button onclick="changeQty('mini1', -1)">−</button>
+              <input type="text" id="mini1" value="0" readonly />
+              <button onclick="changeQty('mini1', 1)">+</button>
+              <span>$</span><input type="text" class="price" placeholder="0.00" />
+            </div>
+          </div>
+
+          <div class="option-row">
+            <label>Reg</label>
+            <div class="qty-control">
+              <button onclick="changeQty('reg1', -1)">−</button>
+              <input type="text" id="reg1" value="0" readonly />
+              <button onclick="changeQty('reg1', 1)">+</button>
+              <span>$</span><input type="text" class="price" placeholder="0.00" />
+            </div>
+          </div>
+        </div>
+
+        <button class="add-cart">ADD TO CART</button>
+      </div>
+    </div>
   </main>
   <!--FOOTER-->
   <footer class="footer">
@@ -76,8 +109,6 @@
 </footer>
 
 
-
-<!--Load nav bar SCRIPT-->
 <script>
   fetch('navbar.html')
     .then(response => response.text())
@@ -85,6 +116,28 @@
       document.getElementById('navbar-placeholder').innerHTML = data;
     })
     .catch(error => console.error('Navbar load error:', error));
+
+  // Open modal
+  function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+  }
+
+  // Close modal on click outside
+  window.onclick = function(e) {
+    document.querySelectorAll('.modal').forEach(modal => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  };
+
+  // Quantity changer
+  function changeQty(inputId, delta) {
+    const input = document.getElementById(inputId);
+    let value = parseInt(input.value);
+    if (isNaN(value)) value = 0;
+    input.value = Math.max(0, value + delta);
+  }
 </script>
 
 </body>
