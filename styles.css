@@ -312,24 +312,33 @@ h2 {
     }
 
     .cupcake-card {
-      background-color: #fbe8e6;
-      padding: 1.5rem 1rem;
+      background-color:#F0DCD7;
+      padding: 1.5rem 1rem 1rem;
       border-radius: 1.5rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      width: 180px;
+      margin-top:50px;
+      width: 170px;
+      height: 195px;
+      position: relative;
+      overflow: visible;
     }
 
     .cupcake-card img {
-      max-width: 100%;
+      position: relative;
+      top: -70px;
+      max-width: 120%;
       height: auto;
-      margin-bottom: 1rem;
+      z-index: 2;
     }
 
     .cupcake-card p {
       font-family: "Pacifico", cursive;
       font-size: 1.2rem;
       color: #4e3d36;
-      margin-bottom: 0.8rem;
+      margin: -10px 0 0.8rem;
+      margin-top:-100px;     
+      position: relative;
+      z-index: 1;
     }
 
     .cupcake-card button {
