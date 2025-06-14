@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Cart - Mister Nice Guys</title>
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="icon" href="https://www.misterniceguy.com.au/wp-content/themes/misterniceguy/images/global/logo.png">
+</head>
+
+<body>
+  <!-- Load navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <main class="cart-page">
+    <h1>Shopping Cart</h1>
+    <div class="cart-grid">
+
+      <!-- LEFT SIDE: CART ITEMS -->
+      <section class="cart-items" id="cart-items">
+        <!-- Dynamic items will be injected here -->
+      </section>
+
+      <!-- RIGHT SIDE: CUSTOMER DETAILS -->
+      <section class="cart-details">
+        <h2>Your Details</h2>
+
+        <div class="pickup-toggle">
+          <button class="pickup active" onclick="selectPickup(true)">Pick-up</button>
+          <button class="delivery" onclick="selectPickup(false)">Delivery</button>
+        </div>
+
+        <div class="pickup-date">
+          <label for="pickup-date">Select date of pick-up</label>
+          <input type="date" id="pickup-date" />
+        </div>
+
+        <div class="contact-fields">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Your Name" />
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="your@email.com" />
+          <label for="mobile">Mobile</label>
+          <input type="text" id="mobile" placeholder="04 XXXX XXXX" />
+        </div>
+
+        <button class="pay-now">PAY NOW!</button>
+        <a href="index.html" class="shop-more-btn">&larr; Shop More</a>
+      </section>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>
+      Terms & Conditions | Refund Policy | Privacy Policy | FAQs<br>
+      <strong>Mister Nice Guys BakeShop</strong><br>
+      151 Union Rd, Ascot Vale 3032 Australia<br>
+      Website by Maryam AL-Mahdi<br>
+      &copy; MNG BAKERY PTY LTD 2025
+    </p>
+  </footer>
+
+  <script>
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+      });
+
+    // Load cart data from localStorage
+    if (!localStorage.getItem("cart")) {
+      localStorage.setItem("cart", JSON.stringify([
+        {
+          name: "Rockin Roll",
+          image: "Choc-cupcakes/rockinrollin.svg",
+          qtyMini: 24,
+          qtyReg: 12
+        }
+      ]));
+    }
+
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    function renderCart() {
+      const container = document.getElementById('cart-items');
+      container.innerHTML = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.qtyMini * 3.5 + item.qtyReg * 5.6;
+        total += itemTotal;
+        container.innerHTML += `
+          <div class="cart-item">
+            <h2>${item.name}</h2>
+            <img src="${item.image}" alt="${item.name}">
+            <div class="qty-group">
+              <label>Mini</label>
+              <button onclick="updateQty(${index}, 'mini', -1)">-</button>
+              <input type="text" value="${item.qtyMini}" readonly>
+              <button onclick="updateQty(${index}, 'mini', 1)">+</button>
+              <label>Reg</label>
+              <button onclick="updateQty(${index}, 'reg', -1)">-</button>
+              <input type="text" value="${item.qtyReg}" readonly>
+              <button onclick="updateQty(${index}, 'reg', 1)">+</button>
+            </div>
+            <div class="item-total">Total: $${itemTotal.toFixed(2)}</div>
+            <a href="#" class="delete-item" onclick="removeItem(${index})">Delete</a>
+            <hr>
+          </div>
+        `;
+      });
+
+      container.innerHTML += `
+        <div class="cart-total-bar">
+          Total: $${total.toFixed(2)}
+        </div>
+      `;
+    }
+
+    function updateQty(index, type, delta) {
+      const min = type === 'mini' ? 24 : 12;
+      const field = type === 'mini' ? 'qtyMini' : 'qtyReg';
+      cart[index][field] = Math.max(min, cart[index][field] + delta);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function selectPickup(isPickup) {
+      document.querySelector('.pickup').classList.toggle('active', isPickup);
+      document.querySelector('.delivery').classList.toggle('active', !isPickup);
+    }
+
+    window.onload = renderCart;
+  </script>
+</body>
+</html>
