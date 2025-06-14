@@ -65,20 +65,22 @@
     </div>
 
     <!-- Rockin Rollin Popup -->
-    <div id="rockin" class="modal">
+     <div id="rockin" class="modal">
       <div class="modal-content">
-        <h2>Rockin Rollin</h2>
-        <img src="Choc-cupcakes/rockinrollin.svg" alt="Rockin Rollin" />
-        <p class="desc">Chocolate cupcake with Strawberry Frosting and Chocolate Ganache</p>
+        <div class="modal-left">
+          <h2>Rockin Rollin</h2>
+          <img src="Choc-cupcakes/rockinrollin.svg" alt="Rockin Rollin" />
+          <p class="desc">Chocolate cupcake with Strawberry Frosting and Chocolate Ganache</p>
+        </div>
 
-        <div class="options">
+        <div class="modal-right">
           <div class="option-row">
             <label>Mini</label>
             <div class="qty-control">
               <button onclick="changeQty('mini1', -1)">−</button>
               <input type="text" id="mini1" value="0" readonly />
               <button onclick="changeQty('mini1', 1)">+</button>
-              <span>$</span><input type="text" class="price" placeholder="0.00" />
+              <span>$</span><input type="text" class="price" id="miniPrice" value="0" readonly />
             </div>
           </div>
 
@@ -88,15 +90,17 @@
               <button onclick="changeQty('reg1', -1)">−</button>
               <input type="text" id="reg1" value="0" readonly />
               <button onclick="changeQty('reg1', 1)">+</button>
-              <span>$</span><input type="text" class="price" placeholder="0.00" />
+              <span>$</span><input type="text" class="price" id="regPrice" value="0" readonly />
             </div>
           </div>
-        </div>
 
-        <button class="add-cart">ADD TO CART</button>
+          <div class="total-display" id="totalPrice">Total: $0.00</div>
+          <button class="add-cart">ADD TO CART</button>
+        </div>
       </div>
     </div>
   </main>
+
   <!--FOOTER-->
   <footer class="footer">
   <p>
@@ -132,12 +136,45 @@
   };
 
   // Quantity changer
-  function changeQty(inputId, delta) {
-    const input = document.getElementById(inputId);
-    let value = parseInt(input.value);
-    if (isNaN(value)) value = 0;
-    input.value = Math.max(0, value + delta);
-  }
+  const PRICING = {
+      mini: 3.5,
+      reg: 5.6,
+      minQty: {
+        mini: 24,
+        reg: 12
+      }
+    };
+
+    function changeQty(inputId, delta) {
+      const input = document.getElementById(inputId);
+      const type = inputId.includes('mini') ? 'mini' : 'reg';
+      let value = parseInt(input.value);
+      if (isNaN(value)) value = 0;
+
+      const newValue = Math.max(PRICING.minQty[type], value + delta);
+      input.value = newValue;
+
+      updateTotal();
+    }
+
+    function updateTotal() {
+      const miniQty = parseInt(document.getElementById('mini1').value) || 0;
+      const regQty = parseInt(document.getElementById('reg1').value) || 0;
+
+      const miniTotal = miniQty * PRICING.mini;
+      const regTotal = regQty * PRICING.reg;
+      const grandTotal = (miniTotal + regTotal).toFixed(2);
+
+      document.getElementById('miniPrice').value = miniTotal.toFixed(2);
+      document.getElementById('regPrice').value = regTotal.toFixed(2);
+      document.getElementById('totalPrice').textContent = `Total: $${grandTotal}`;
+    }
+
+    window.onload = function () {
+      document.getElementById('mini1').value = PRICING.minQty.mini;
+      document.getElementById('reg1').value = PRICING.minQty.reg;
+      updateTotal();
+    };
 </script>
 
 </body>
