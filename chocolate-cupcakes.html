@@ -95,7 +95,9 @@
           </div>
 
           <div class="total-display" id="totalPrice">Total: $0.00</div>
-          <button class="add-cart">ADD TO CART</button>
+          <button class="add-cart" onclick="addToCart()">ADD TO CART</button>
+          <button class="view-cart" onclick="location.href='cart.html'">VIEW CART</button>
+          <button class="shop-more" onclick="closeModal('rockin')">Shop more</button>
         </div>
       </div>
     </div>
@@ -118,9 +120,22 @@
     .then(response => response.text())
     .then(data => {
       document.getElementById('navbar-placeholder').innerHTML = data;
-    })
+
+      // Add cart icon counter
+    const cartIcon = document.querySelector(".nav-icon img[alt='Cart']");
+    if (cartIcon) {
+      const cartBubble = document.createElement("div");
+      cartBubble.classList.add("cart-count");
+      cartBubble.id = "cart-count";
+      cartBubble.textContent = "1";
+      cartIcon.parentElement.style.position = "relative";
+      cartIcon.parentElement.appendChild(cartBubble);
+    }
+   })
     .catch(error => console.error('Navbar load error:', error));
 
+
+      
   // Open modal
   function openModal(id) {
     document.getElementById(id).style.display = 'flex';
@@ -135,7 +150,13 @@
     });
   };
 
-  // Quantity changer
+  //clicking shop more closes modal
+  function closeModal(id) {
+  document.getElementById(id).style.display = 'none';
+}
+
+
+  // Pricing 
   const PRICING = {
       mini: 3.5,
       reg: 5.6,
@@ -157,6 +178,7 @@
       updateTotal();
     }
 
+    //Pricing calculation
     function updateTotal() {
       const miniQty = parseInt(document.getElementById('mini1').value) || 0;
       const regQty = parseInt(document.getElementById('reg1').value) || 0;
@@ -175,6 +197,16 @@
       document.getElementById('reg1').value = PRICING.minQty.reg;
       updateTotal();
     };
+
+    //adding to cart
+  function addToCart() {
+    document.querySelector('.add-cart').style.display = 'none';
+    document.querySelector('.view-cart').style.display = 'inline-block';
+    document.querySelector('.shop-more').style.display = 'inline-block';
+    const bubble = document.getElementById('cart-count');
+    if (bubble) bubble.style.display = 'inline-block';
+  }
+
 </script>
 
 </body>

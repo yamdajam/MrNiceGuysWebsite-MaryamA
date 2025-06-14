@@ -474,9 +474,46 @@ h2 {
   margin-top:30px
 }
 
+/* Adding to cart*/
+.view-cart, .shop-more {
+  margin-top: 1rem;
+  display: none;
+}
+
+.view-cart {
+  background-color: #ec72aa;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.shop-more {
+  background: none;
+  color: #ec72aa;
+  text-decoration: underline;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.cart-count {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ec72aa;
+  color: white;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 999px;
+  display: none;
+}
+
 /* Responsive adjustment for mobile webview */
 @media (max-width: 480px) {
-  
+
   body {
       background-size: 60%;
     }
