@@ -97,6 +97,21 @@ h2 {
   transform: scale(1.15);
 }
 
+/*Go back button*/
+.back-button {
+  position: absolute;
+  top: 220px;   /* adjust depending on navbar height */
+  left: 20px;
+  z-index: 999;
+  display: inline-block;
+}
+
+.back-button img {
+  width: 120px;   /* adjust depending on your SVG design */
+  height: auto;
+  cursor: pointer;
+}
+
 /* HERO SECTION*/
 .hero {
   text-align: center;

@@ -18,6 +18,12 @@
 <body>
 <!--NAVBAR PLACEHOLDER -->
   <div id="navbar-placeholder"></div>
+
+  <!--Go Back navigation-->
+  <a href="javascript:history.back()" class="back-button">
+  <img src="goback.svg" alt="Go Back"></a>
+
+
   <main>
     <a href="choose-base.html" class="go-back">Go back</a>
     <h1>Chocolate Cupcakes</h1>
@@ -30,7 +36,7 @@
       <div class="cupcake-card">
         <img src="Choc-cupcakes/countchocula.svg" alt="Count Chocula" />
         <p>Count Chocula</p>
-        <button>View</button>
+        <button onclick="openModal('count')">View</button>
       </div>
       <div class="cupcake-card">
         <img src="Choc-cupcakes/neopolitan.svg" alt="Neapolitan" />
@@ -101,6 +107,44 @@
         </div>
       </div>
     </div>
+
+    <!-- Count Chocula Popup -->
+    <div id="count" class="modal">
+      <div class="modal-content">
+        <div class="modal-left">
+          <h2>Count Chocula</h2>
+          <img src="Choc-cupcakes/countchocula.svg" alt="Count Chocula" />
+          <p class="desc">Chocolate cupcake with chocolate chips and fudge frosting</p>
+        </div>
+
+        <div class="modal-right">
+          <div class="option-row">
+            <label>Mini</label>
+            <div class="qty-control">
+              <button onclick="changeQty('mini2', -1)">−</button>
+              <input type="text" id="mini2" value="0" readonly />
+              <button onclick="changeQty('mini2', 1)">+</button>
+              <span>$</span><input type="text" class="price" id="miniPrice2" value="0" readonly />
+            </div>
+          </div>
+
+          <div class="option-row">
+            <label>Reg</label>
+            <div class="qty-control">
+              <button onclick="changeQty('reg2', -1)">−</button>
+              <input type="text" id="reg2" value="0" readonly />
+              <button onclick="changeQty('reg2', 1)">+</button>
+              <span>$</span><input type="text" class="price" id="regPrice2" value="0" readonly />
+            </div>
+          </div>
+
+          <div class="total-display" id="totalPrice2">Total: $0.00</div>
+          <button class="add-cart" onclick="addToCart()">ADD TO CART</button>
+          <button class="view-cart" onclick="location.href='cart.html'">VIEW CART</button>
+          <button class="shop-more" onclick="closeModal('count')">Shop more</button>
+        </div>
+      </div>
+    </div>
   </main>
 
   <!--FOOTER-->
@@ -138,7 +182,7 @@
           }
 
           bubble.textContent = cartData.length;
-          bubble.style.display = "inline-block"; // just in case
+          bubble.style.display = "inline-block";
         }
       }, 50);
     })
@@ -163,8 +207,8 @@
 
   //clicking shop more closes modal
   function closeModal(id) {
-  document.getElementById(id).style.display = 'none';
-}
+    document.getElementById(id).style.display = 'none';
+  }
 
 
   // Pricing 
@@ -191,59 +235,77 @@
 
     //Pricing calculation
     function updateTotal() {
-      const miniQty = parseInt(document.getElementById('mini1').value) || 0;
-      const regQty = parseInt(document.getElementById('reg1').value) || 0;
+      const miniQty1 = parseInt(document.getElementById('mini1')?.value || 0);
+      const regQty1 = parseInt(document.getElementById('reg1')?.value || 0);
+      const miniQty2 = parseInt(document.getElementById('mini2')?.value || 0);
+      const regQty2 = parseInt(document.getElementById('reg2')?.value || 0);
 
-      const miniTotal = miniQty * PRICING.mini;
-      const regTotal = regQty * PRICING.reg;
-      const grandTotal = (miniTotal + regTotal).toFixed(2);
+      const miniTotal1 = miniQty1 * PRICING.mini;
+      const regTotal1 = regQty1 * PRICING.reg;
+      const miniTotal2 = miniQty2 * PRICING.mini;
+      const regTotal2 = regQty2 * PRICING.reg;
 
-      document.getElementById('miniPrice').value = miniTotal.toFixed(2);
-      document.getElementById('regPrice').value = regTotal.toFixed(2);
-      document.getElementById('totalPrice').textContent = `Total: $${grandTotal}`;
+      const total1 = (miniTotal1 + regTotal1).toFixed(2);
+      const total2 = (miniTotal2 + regTotal2).toFixed(2);
+
+      if (document.getElementById('miniPrice')) document.getElementById('miniPrice').value = miniTotal1.toFixed(2);
+      if (document.getElementById('regPrice')) document.getElementById('regPrice').value = regTotal1.toFixed(2);
+      if (document.getElementById('totalPrice')) document.getElementById('totalPrice').textContent = `Total: $${total1}`;
+
+      if (document.getElementById('miniPrice2')) document.getElementById('miniPrice2').value = miniTotal2.toFixed(2);
+      if (document.getElementById('regPrice2')) document.getElementById('regPrice2').value = regTotal2.toFixed(2);
+      if (document.getElementById('totalPrice2')) document.getElementById('totalPrice2').textContent = `Total: $${total2}`;
     }
 
-    window.onload = function () {
-      document.getElementById('mini1').value = 0;
-      document.getElementById('reg1').value = 0;
-      updateTotal();
-    };
-  
-
-  //adding to cart
-  function addToCart() {
-    const miniQty = parseInt(document.getElementById('mini1').value) || 0;
-    const regQty = parseInt(document.getElementById('reg1').value) || 0;
-
-  const cartItem = {
-    name: "Rockin Rollin",
-    image: "Choc-cupcakes/rockinrollin.svg",
-    qtyMini: miniQty,
-    qtyReg: regQty
+     window.onload = function () {
+    ['mini1', 'reg1', 'mini2', 'reg2'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        const type = id.includes('mini') ? 'mini' : 'reg';
+        el.value = PRICING.minQty[type];
+      }
+    });
+    updateTotal();
   };
 
-  // Get existing cart or initialize empty array
-  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  // ✅ FIXED: Add to Cart Logic
+  function addToCart() {
+    const openModal = document.querySelector('.modal[style*="display: flex"]');
+    if (!openModal) return;
 
-  // Optional: Remove duplicates (replace same item)
-  cart = cart.filter(item => item.name !== cartItem.name);
+    const productName = openModal.querySelector('h2')?.textContent.trim();
+    const productImage = openModal.querySelector('img')?.getAttribute('src') || '';
 
-  // Add new item
-  cart.push(cartItem);
+    const miniInput = openModal.querySelector('input[id^="mini"]');
+    const regInput = openModal.querySelector('input[id^="reg"]');
+    const miniQty = parseInt(miniInput?.value || 0);
+    const regQty = parseInt(regInput?.value || 0);
 
-  // Save to localStorage
-  localStorage.setItem('cart', JSON.stringify(cart));
+    if (miniQty < PRICING.minQty.mini && regQty < PRICING.minQty.reg) return;
 
-  // Show cart view/shop more buttons
-  document.querySelector('.add-cart').style.display = 'none';
-  document.querySelector('.view-cart').style.display = 'inline-block';
-  document.querySelector('.shop-more').style.display = 'inline-block';
+    const cartItem = {
+      name: productName,
+      image: productImage,
+      qtyMini: miniQty,
+      qtyReg: regQty
+    };
 
-  // Update cart icon bubble
-  const bubble = document.getElementById('cart-count');
-  if (bubble) bubble.style.display = 'inline-block';
-}
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    cart = cart.filter(item => item.name !== cartItem.name);
+    cart.push(cartItem);
+    localStorage.setItem('cart', JSON.stringify(cart));
 
+    const bubble = document.getElementById('cart-count');
+    if (bubble) {
+      bubble.textContent = cart.length;
+      bubble.style.display = 'inline-block';
+    }
+
+    openModal.querySelector('.add-cart').style.display = 'none';
+    openModal.querySelector('.view-cart').style.display = 'inline-block';
+    openModal.querySelector('.shop-more').style.display = 'inline-block';
+  }
+  
 </script>
 
 </body>
