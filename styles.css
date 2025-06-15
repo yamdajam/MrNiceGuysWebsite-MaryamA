@@ -503,12 +503,12 @@ h2 {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: #ec72aa;
+  background: #657D71;
   color: white;
   font-size: 0.75rem;
   padding: 2px 6px;
   border-radius: 999px;
-  display: none;
+  display: inline-block;
 }
 
 /*--------------------------------CSS FOR CART PAGE--------------------- */
@@ -594,7 +594,7 @@ h2 {
 }
 
 .cart-details h2 {
-  font-family: "Barriecito", cursive;
+  font-family:"Barriecito", cursive;
   margin-bottom: 1rem;
 }
 
@@ -767,6 +767,7 @@ h2 {
   .jump-btn {
     font-size: 1.4rem;
     padding: 0.6rem 1rem;
+    font-family: "Barriecito", cursive;
   }
 
 

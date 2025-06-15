@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mister Nice Guys</title>
+  <title>Choose Base - Mister Nice Guys</title>
   <link rel="icon" type="image/x-icon" href="https://www.misterniceguy.com.au/wp-content/themes/misterniceguy/images/global/logo.png">
 
   <!--Google fonts embed-->
@@ -18,6 +18,10 @@
 <body>
 <!--NAVBAR PLACEHOLDER -->
   <div id="navbar-placeholder"></div>
+
+<!--Go Back navigation-->
+  <a href="javascript:history.back()" class="back-button">
+  <img src="Home-page/Nav_bar/back-arrow.svg" alt="Go Back"></a>
 
   <main>
   <section class="base-selection">
@@ -59,14 +63,38 @@
 
 
 
+
 <!--Load nav bar SCRIPT-->
 <script>
   fetch('navbar.html')
     .then(response => response.text())
     .then(data => {
       document.getElementById('navbar-placeholder').innerHTML = data;
+      
+      setTimeout(() => {
+        const cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+        const cartIcon = document.querySelector(".nav-icon img[alt='Cart']");
+
+        if (cartIcon && cartData.length > 0) {
+          let bubble = document.getElementById('cart-count');
+
+          // If bubble doesn't exist, create it
+          if (!bubble) {
+            bubble = document.createElement("div");
+            bubble.id = "cart-count";
+            bubble.classList.add("cart-count");
+            cartIcon.parentElement.style.position = "relative";
+            cartIcon.parentElement.appendChild(bubble);
+          }
+
+          bubble.textContent = cartData.length;
+          bubble.style.display = "inline-block"; // just in case
+        }
+      }, 50);
     })
+
     .catch(error => console.error('Navbar load error:', error));
+    
 </script>
 
 </body>

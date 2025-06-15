@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mister Nice Guys</title>
+  <title>Choc Cupcakes - Mister Nice Guys</title>
   <link rel="icon" type="image/x-icon" href="https://www.misterniceguy.com.au/wp-content/themes/misterniceguy/images/global/logo.png">
 
   <!--Google fonts embed-->
@@ -120,22 +120,33 @@
     .then(response => response.text())
     .then(data => {
       document.getElementById('navbar-placeholder').innerHTML = data;
+     
+      setTimeout(() => {
+        const cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+        const cartIcon = document.querySelector(".nav-icon img[alt='Cart']");
 
-      // Add cart icon counter
-    const cartIcon = document.querySelector(".nav-icon img[alt='Cart']");
-    if (cartIcon) {
-      const cartBubble = document.createElement("div");
-      cartBubble.classList.add("cart-count");
-      cartBubble.id = "cart-count";
-      cartBubble.textContent = "1";
-      cartIcon.parentElement.style.position = "relative";
-      cartIcon.parentElement.appendChild(cartBubble);
-    }
-   })
+        if (cartIcon && cartData.length > 0) {
+          let bubble = document.getElementById('cart-count');
+
+          // If bubble doesn't exist, create it
+          if (!bubble) {
+            bubble = document.createElement("div");
+            bubble.id = "cart-count";
+            bubble.classList.add("cart-count");
+            cartIcon.parentElement.style.position = "relative";
+            cartIcon.parentElement.appendChild(bubble);
+          }
+
+          bubble.textContent = cartData.length;
+          bubble.style.display = "inline-block"; // just in case
+        }
+      }, 50);
+    })
+
     .catch(error => console.error('Navbar load error:', error));
 
 
-      
+//------POP UP (MODAL)-----//    
   // Open modal
   function openModal(id) {
     document.getElementById(id).style.display = 'flex';
@@ -199,7 +210,7 @@
     };
   
 
-    //adding to cart
+  //adding to cart
   function addToCart() {
     const miniQty = parseInt(document.getElementById('mini1').value) || 0;
     const regQty = parseInt(document.getElementById('reg1').value) || 0;

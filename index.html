@@ -90,8 +90,30 @@
     .then(response => response.text())
     .then(data => {
       document.getElementById('navbar-placeholder').innerHTML = data;
+
+    setTimeout(() => {
+        const cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+        const cartIcon = document.querySelector(".nav-icon img[alt='Cart']");
+
+        if (cartIcon && cartData.length > 0) {
+          let bubble = document.getElementById('cart-count');
+
+          // If bubble doesn't exist, create it
+          if (!bubble) {
+            bubble = document.createElement("div");
+            bubble.id = "cart-count";
+            bubble.classList.add("cart-count");
+            cartIcon.parentElement.style.position = "relative";
+            cartIcon.parentElement.appendChild(bubble);
+          }
+
+          bubble.textContent = cartData.length;
+          bubble.style.display = "inline-block"; // just in case
+        }
+      }, 50);
     })
-    .catch(error => console.error('Navbar load error:', error));
+    
+  .catch(error => console.error('Navbar load error:', error));
 </script>
 
 </body>

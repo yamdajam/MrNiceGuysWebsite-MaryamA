@@ -3,10 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Cart - Mister Nice Guys</title>
+  <title>Your Cart - Mr Nice Guys</title>
+  <link rel="icon" type="image/x-icon" href="https://www.misterniceguy.com.au/wp-content/themes/misterniceguy/images/global/logo.png">
+
+  <!--Google fonts embed-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barriecito&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pacifico&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="styles.css"/>
-  <link rel="icon" href="https://www.misterniceguy.com.au/wp-content/themes/misterniceguy/images/global/logo.png">
 </head>
 
 <body>
@@ -19,7 +25,6 @@
 
       <!-- LEFT SIDE: CART ITEMS -->
       <section class="cart-items" id="cart-items">
-        <!-- Dynamic items will be injected here -->
       </section>
 
       <!-- RIGHT SIDE: CUSTOMER DETAILS -->
@@ -62,75 +67,114 @@
     </p>
   </footer>
 
-  <script>
-    fetch('navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar-placeholder').innerHTML = data;
-      });
+<script>
+  // Load nav bar
+  fetch('navbar.html')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('navbar-placeholder').innerHTML = data;
+    
+    setTimeout(() => {
+        const cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+        const cartIcon = document.querySelector(".nav-icon img[alt='Cart']");
 
-    let cart = [];
+        if (cartIcon && cartData.length > 0) {
+          let bubble = document.getElementById('cart-count');
 
-    function loadCart() {
-      cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    }
+          // If bubble doesn't exist, create it
+          if (!bubble) {
+            bubble = document.createElement("div");
+            bubble.id = "cart-count";
+            bubble.classList.add("cart-count");
+            cartIcon.parentElement.style.position = "relative";
+            cartIcon.parentElement.appendChild(bubble);
+          }
 
-    function renderCart() {
-      const container = document.getElementById('cart-items');
-      container.innerHTML = '';
-      let total = 0;
+          bubble.textContent = cartData.length;
+          bubble.style.display = "inline-block"; // just in case
+        }
+      }, 50);
+    })
 
-      cart.forEach((item, index) => {
-        const itemTotal = item.qtyMini * 3.5 + item.qtyReg * 5.6;
-        total += itemTotal;
-        container.innerHTML += `
-          <div class="cart-item">
-            <h2>${item.name}</h2>
-            <img src="${item.image}" alt="${item.name}">
-            <div class="qty-group">
-              <label>Mini</label>
-              <button onclick="updateQty(${index}, 'mini', -1)">-</button>
-              <input type="text" value="${item.qtyMini}" readonly>
-              <button onclick="updateQty(${index}, 'mini', 1)">+</button>
-              <label>Reg</label>
-              <button onclick="updateQty(${index}, 'reg', -1)">-</button>
-              <input type="text" value="${item.qtyReg}" readonly>
-              <button onclick="updateQty(${index}, 'reg', 1)">+</button>
-            </div>
-            <div class="item-total">Total: $${itemTotal.toFixed(2)}</div>
-            <a href="#" class="delete-item" onclick="removeItem(${index})">Delete</a>
-            <hr>
-          </div>
-        `;
-      });
+    .catch(error => console.error('Navbar load error:', error));
+
+  // Declare the cart array globally
+  let cart = [];
+
+  // Load cart items from localStorage
+  function loadCart() {
+    cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  }
+
+  // Render all cart items to the page
+  function renderCart() {
+    const container = document.getElementById('cart-items');
+    container.innerHTML = ''; // Clear previous items
+    let total = 0;
+
+    // Loop through each item in the cart
+    cart.forEach((item, index) => {
+      const itemTotal = item.qtyMini * 3.5 + item.qtyReg * 5.6;
+      total += itemTotal;
 
       container.innerHTML += `
-        <div class="cart-total-bar">
-          Total: $${total.toFixed(2)}
+        <div class="cart-item">
+          <h2>${item.name}</h2>
+          <img src="${item.image}" alt="${item.name}">
+          <div class="qty-group">
+            <label>Mini</label>
+            <button onclick="updateQty(${index}, 'mini', -1)">-</button>
+            <input type="text" value="${item.qtyMini}" readonly>
+            <button onclick="updateQty(${index}, 'mini', 1)">+</button>
+            <label>Reg</label>
+            <button onclick="updateQty(${index}, 'reg', -1)">-</button>
+            <input type="text" value="${item.qtyReg}" readonly>
+            <button onclick="updateQty(${index}, 'reg', 1)">+</button>
+          </div>
+          <div class="item-total">Total: $${itemTotal.toFixed(2)}</div>
+          <a href="#" class="delete-item" onclick="removeItem(${index})">Delete</a>
+          <hr>
         </div>
       `;
-    }
+    });
 
-    function updateQty(index, type, delta) {
-      const min = type === 'mini' ? 24 : 12;
-      const field = type === 'mini' ? 'qtyMini' : 'qtyReg';
-      cart[index][field] = Math.max(min, cart[index][field] + delta);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
-    }
+    // Add final total bar
+    container.innerHTML += `
+      <div class="cart-total-bar">
+        Total: $${total.toFixed(2)}
+      </div>
+    `;
+  }
 
-    function removeItem(index) {
-      cart.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
-    }
+  // Update item quantity and re-save cart
+  function updateQty(index, type, delta) {
+    const min = type === 'mini' ? 24 : 12; // minimum order quantities
+    const field = type === 'mini' ? 'qtyMini' : 'qtyReg';
+    cart[index][field] = Math.max(min, cart[index][field] + delta);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+  }
 
-    function selectPickup(isPickup) {
-      document.querySelector('.pickup').classList.toggle('active', isPickup);
-      document.querySelector('.delivery').classList.toggle('active', !isPickup);
-    }
+  // Remove item from cart
+  function removeItem(index) {
+    cart.splice(index, 1); // remove item by index
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+  }
 
-    window.onload = renderCart;
-  </script>
+  // Toggle between pickup or delivery
+  function selectPickup(isPickup) {
+    document.querySelector('.pickup').classList.toggle('active', isPickup);
+    document.querySelector('.delivery').classList.toggle('active', !isPickup);
+  }
+
+  // Load and display cart once page finishes loading
+  window.onload = () => {
+    loadCart();
+    renderCart();
+  };
+
+</script>
+
 </body>
 </html>
