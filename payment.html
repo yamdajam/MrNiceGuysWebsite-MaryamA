@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mister Nice Guys</title>
+  <title>Payment - Mr Nice Guys</title>
   <link rel="icon" type="image/x-icon" href="https://www.misterniceguy.com.au/wp-content/themes/misterniceguy/images/global/logo.png">
 
   <!--Google fonts embed-->
@@ -24,7 +24,6 @@
   <img src="goback.svg" alt="Go Back"></a>
 
 <main class="payment-section">
-    <a href="cart.html" class="go-back">Go back</a>
     <h1>Payment Details</h1>
 
     <form class="payment-form" onsubmit="return validatePaymentForm()" novalidate>
@@ -114,6 +113,36 @@
       return true;
     }
 
+</script>
+
+<script>
+  // Format card number: 1234 5678 9012 3456
+  document.getElementById("cardNumber").addEventListener("input", function (e) {
+    let val = e.target.value.replace(/\D/g, ""); // Remove non-digits
+    val = val.substring(0, 16); // Limit to 16 digits
+    let spaced = val.match(/.{1,4}/g); // Break into 4-digit chunks
+    e.target.value = spaced ? spaced.join(" ") : "";
+  });
+
+  // Format expiry: MM/YY
+  document.getElementById("expiry").addEventListener("input", function (e) {
+    let val = e.target.value.replace(/\D/g, "");
+    if (val.length >= 3) {
+      e.target.value = val.substring(0, 2) + "/" + val.substring(2, 4);
+    } else {
+      e.target.value = val;
+    }
+  });
+
+  // Format phone: 0412 345 678
+  document.getElementById("phone").addEventListener("input", function (e) {
+    let val = e.target.value.replace(/\D/g, "").substring(0, 10);
+    let formatted = "";
+    if (val.length > 0) formatted = val.substring(0, 4);
+    if (val.length >= 5) formatted += " " + val.substring(4, 7);
+    if (val.length >= 8) formatted += " " + val.substring(7, 10);
+    e.target.value = formatted;
+  });
 </script>
 
 </body>

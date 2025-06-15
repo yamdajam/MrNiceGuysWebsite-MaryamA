@@ -371,6 +371,7 @@ h2 {
   background-color: #71c578;
 }
 
+/*-------------CSS FOR POP UP MODAL-------------*/
 .modal {
   display: none; 
   position: fixed;
@@ -683,16 +684,59 @@ h2 {
   display: block;
 }
 
-@media (max-width: 768px) {
-  .cart-grid {
-    flex-direction: column;
-    align-items: center;
-  }
-  .cart-items, .cart-details {
-    width: 100%;
-    max-width: 500px;
-  }
-} 
+/*---------------------------CSS FOR PAYMENT PAGE------------------*/
+.payment-section {
+  padding: 8rem 1rem 4rem;
+  max-width: 600px;
+  margin: auto;
+  margin-top: -130px;
+  text-align: left;
+  transform: scale(0.9);     
+  transform-origin: top center;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.payment-form label {
+  font-weight: bold;
+  font-family: "Nunito", sans-serif;
+  color: #4e3d36;
+}
+
+.payment-form input {
+  padding: 0.7rem 1rem;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: "Nunito", sans-serif;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.confirm-btn {
+  background-color: #ec72aa;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: "Barriecito", cursive;
+  align-self: center;
+  margin-top: 2rem;
+}
+
+.confirm-btn:hover {
+  background-color: #71c578;
+}
+
 
 /* Responsive adjustment for mobile webview */
 @media (max-width: 480px) {
@@ -842,6 +886,19 @@ h2 {
   .base-selection h1 {
     font-size: 1.6rem;
   }
+
+  
+@media (max-width: 768px) {
+  .cart-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  .cart-items, .cart-details {
+    width: 100%;
+    max-width: 500px;
+  }
+} 
+
   /*FOOTER*/
   .footer {
     height: 200px;
