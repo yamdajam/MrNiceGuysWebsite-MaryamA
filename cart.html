@@ -69,19 +69,11 @@
         document.getElementById('navbar-placeholder').innerHTML = data;
       });
 
-    // Load cart data from localStorage
-    if (!localStorage.getItem("cart")) {
-      localStorage.setItem("cart", JSON.stringify([
-        {
-          name: "Rockin Roll",
-          image: "Choc-cupcakes/rockinrollin.svg",
-          qtyMini: 24,
-          qtyReg: 12
-        }
-      ]));
-    }
+    let cart = [];
 
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    function loadCart() {
+      cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    }
 
     function renderCart() {
       const container = document.getElementById('cart-items');

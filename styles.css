@@ -511,6 +511,174 @@ h2 {
   display: none;
 }
 
+/*--------------------------------CSS FOR CART PAGE--------------------- */
+.cart-page {
+  padding: 7rem 2rem 4rem;
+  background: #fdf6ec;
+  font-family: "Nunito", sans-serif;
+}
+
+.cart-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cart-items, .cart-details {
+  background: #F0DCD7;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  flex: 1 1 400px;
+  max-width: 550px;
+}
+
+.cart-item {
+  margin-bottom: 1.5rem;
+}
+
+.cart-item img {
+  max-width: 120px;
+  margin: 1rem 0;
+}
+
+.qty-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.qty-group button {
+  background: #ec72aa;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.qty-group input {
+  width: 3rem;
+  text-align: center;
+  border: none;
+  background: #fff;
+  font-size: 1rem;
+}
+
+.item-total {
+  margin: 1rem 0;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #6B534C;
+}
+
+.delete-item {
+  color: #ec72aa;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.cart-total-bar {
+  margin-top: 2rem;
+  background: #20605a;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.cart-details h2 {
+  font-family: "Barriecito", cursive;
+  margin-bottom: 1rem;
+}
+
+.pickup-toggle {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.pickup-toggle button {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.pickup-toggle .pickup {
+  background: #fff9b0;
+}
+
+.pickup-toggle .delivery {
+  background: #20605a;
+  color: white;
+}
+
+.pickup-toggle .active {
+  box-shadow: 0 0 0 2px #000 inset;
+}
+
+.contact-fields label,
+.pickup-date label {
+  display: block;
+  margin-top: 1rem;
+  text-align: left;
+  font-weight: bold;
+  color: #4e3d36;
+}
+
+.contact-fields input,
+.pickup-date input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: none;
+  margin-top: 0.3rem;
+}
+
+.pay-now {
+  margin-top: 2rem;
+  background: #ffee8f;
+  border: 3px solid #ec72aa;
+  padding: 1rem 2rem;
+  font-family: "Barriecito", cursive;
+  font-size: 1.4rem;
+  border-radius: 999px;
+  color: #ec72aa;
+  cursor: pointer;
+  width: 100%;
+}
+
+.shop-more-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #20605a;
+  text-decoration: underline;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .cart-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  .cart-items, .cart-details {
+    width: 100%;
+    max-width: 500px;
+  }
+} 
+
 /* Responsive adjustment for mobile webview */
 @media (max-width: 480px) {
 

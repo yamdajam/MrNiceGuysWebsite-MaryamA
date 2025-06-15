@@ -193,19 +193,45 @@
     }
 
     window.onload = function () {
-      document.getElementById('mini1').value = PRICING.minQty.mini;
-      document.getElementById('reg1').value = PRICING.minQty.reg;
+      document.getElementById('mini1').value = 0;
+      document.getElementById('reg1').value = 0;
       updateTotal();
     };
+  
 
     //adding to cart
   function addToCart() {
-    document.querySelector('.add-cart').style.display = 'none';
-    document.querySelector('.view-cart').style.display = 'inline-block';
-    document.querySelector('.shop-more').style.display = 'inline-block';
-    const bubble = document.getElementById('cart-count');
-    if (bubble) bubble.style.display = 'inline-block';
-  }
+    const miniQty = parseInt(document.getElementById('mini1').value) || 0;
+    const regQty = parseInt(document.getElementById('reg1').value) || 0;
+
+  const cartItem = {
+    name: "Rockin Rollin",
+    image: "Choc-cupcakes/rockinrollin.svg",
+    qtyMini: miniQty,
+    qtyReg: regQty
+  };
+
+  // Get existing cart or initialize empty array
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+  // Optional: Remove duplicates (replace same item)
+  cart = cart.filter(item => item.name !== cartItem.name);
+
+  // Add new item
+  cart.push(cartItem);
+
+  // Save to localStorage
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  // Show cart view/shop more buttons
+  document.querySelector('.add-cart').style.display = 'none';
+  document.querySelector('.view-cart').style.display = 'inline-block';
+  document.querySelector('.shop-more').style.display = 'inline-block';
+
+  // Update cart icon bubble
+  const bubble = document.getElementById('cart-count');
+  if (bubble) bubble.style.display = 'inline-block';
+}
 
 </script>
 
