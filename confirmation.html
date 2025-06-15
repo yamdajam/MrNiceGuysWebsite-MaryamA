@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thank You! - Mr Nice Guys</title>
+  <link rel="icon" type="image/x-icon" href="https://www.misterniceguy.com.au/wp-content/themes/misterniceguy/images/global/logo.png">
+
+  <!--Google fonts embed-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barriecito&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pacifico&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+
+<body>
+  <!-- Load navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <main class="thankyou-section">
+    <h1>THANK YOU FOR <span>YOUR</span> PURCHASE!</h1>
+    <img src="Confirmation-page/paymentsuccess.svg" alt="Success" class="success-icon" />
+    <a href="index.html" class="return-link">← Go back to the store</a>
+  </main>
+
+  <!--FOOTER-->
+  <footer class="footer">
+  <p>
+    Terms & Conditions | Refund Policy | Privacy Policy | FAQs<br>
+    <strong>Mister Nice Guys BakeShop</strong><br>
+    151 Union Rd, Ascot Vale 3032 Australia<br>
+    Website by Maryam AL-Mahdi<br>
+    © MNG BAKERY PTY LTD 2025
+  </p>
+</footer>
+
+<script>
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-placeholder').innerHTML = data;
+    });
+
+</script>
+
+</body>
+</html>
+

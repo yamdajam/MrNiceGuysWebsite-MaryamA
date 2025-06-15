@@ -25,7 +25,6 @@
 
 
   <main>
-    <a href="choose-base.html" class="go-back">Go back</a>
     <h1>Chocolate Cupcakes</h1>
     <div class="cupcake-grid">
       <div class="cupcake-card">
@@ -84,8 +83,10 @@
             <label>Mini</label>
             <div class="qty-control">
               <button onclick="changeQty('mini1', -1)">−</button>
+              <input type="text" id="mini1" value="0" readonly />
               <button onclick="changeQty('mini1', 1)">+</button>
-              <span>$</span><input type="text" class="price" id="miniPrice" value="0" readonly />
+              <span>$</span>
+              <input type="text" class="price" id="miniPrice" value="0" readonly />
             </div>
           </div>
 
